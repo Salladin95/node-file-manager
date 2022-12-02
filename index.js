@@ -1,7 +1,6 @@
 import { homedir } from "os";
-import { chdir, cwd } from "node:process";
+import { chdir } from "node:process";
 
-import { doMoveToDir, doUpToDIr, printDir } from "./navigation/index.js";
 import {
   getCLIArgs,
   getValueFromStringAfterSeparator,
@@ -9,6 +8,7 @@ import {
   removeExtraSpaces,
   unknownInput,
 } from "./utils/index.js";
+import { doNavigation, isNavigationCommand } from "./navigation/index.js";
 
 const home = homedir();
 chdir(home);
@@ -19,15 +19,13 @@ const username = getValueFromStringAfterSeparator(args[0], "=");
 greetUser(username, home);
 
 process.stdin.on("data", async (data) => {
-  const stringData = removeExtraSpaces(data);
-  if (stringData.match(/^cd\s.*$/gim)) {
-    doMoveToDir(stringData);
-  } else if (stringData === "up") {
-    doUpToDIr();
-  } else if (stringData === "ls") {
-    await printDir(cwd());
-  } else if (stringData === ".exit") {
+  const dataArray = removeExtraSpaces(data).split(" ");
+  const command = dataArray[0];
+
+  if (command === ".exit") {
     process.emit("SIGINT");
+  } else if (isNavigationCommand(command)) {
+    await doNavigation(dataArray);
   } else {
     console.log(unknownInput);
   }
