@@ -9,14 +9,13 @@ import {
   unknownInput,
 } from "./utils/index.js";
 import { doNavigation, isNavigationCommand } from "./navigation/index.js";
-
-const home = homedir();
-chdir(home);
+import { doFsOperation, isFSCommand } from "./fileOperations/index.js";
 
 const args = getCLIArgs();
 const username = getValueFromStringAfterSeparator(args[0], "=");
 
-greetUser(username, home);
+chdir(homedir());
+greetUser(username);
 
 process.stdin.on("data", async (data) => {
   const dataArray = removeExtraSpaces(data).split(" ");
@@ -26,6 +25,8 @@ process.stdin.on("data", async (data) => {
     process.emit("SIGINT");
   } else if (isNavigationCommand(command)) {
     await doNavigation(dataArray);
+  } else if (isFSCommand(command)) {
+    await doFsOperation(dataArray);
   } else {
     console.log(unknownInput);
   }

@@ -4,4 +4,6 @@ const removeExtraSpaces = (string) =>
 const getValueFromStringAfterSeparator = (string, separator) =>
   string.slice(string.indexOf(separator) + 1);
 
-export { removeExtraSpaces, getValueFromStringAfterSeparator };
+const isSlashAtTheEndOfPath = (path) => (path[-1] === "/" ? path : path + "/");
+
+export { removeExtraSpaces, getValueFromStringAfterSeparator, isSlashAtTheEndOfPath };

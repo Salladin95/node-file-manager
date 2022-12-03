@@ -1,9 +1,14 @@
-import { getMsgWithCurrentPath } from "../utils/greet.js";
+import {getMsgWithCurrentPath} from "../utils/greet.js";
+import {operationErrMsg} from "../utils/index.js";
 
 const withCurrentPathMsgSync = (fn) => {
   return (...arg) => {
-    fn(...arg);
-    console.log(getMsgWithCurrentPath());
+    try {
+      fn(...arg);
+      console.log(getMsgWithCurrentPath());
+    } catch {
+      console.log(operationErrMsg);
+    }
   };
 };
 

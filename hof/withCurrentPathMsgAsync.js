@@ -1,9 +1,14 @@
 import { getMsgWithCurrentPath } from "../utils/greet.js";
+import { operationErrMsg } from "../utils/index.js";
 
 const withCurrentPathMsgAsync = (fn) => {
   return async (...arg) => {
-    await fn(...arg);
-    console.log(getMsgWithCurrentPath());
+    try {
+      await fn(...arg);
+      console.log(getMsgWithCurrentPath());
+    } catch {
+      console.log(operationErrMsg);
+    }
   };
 };
 
