@@ -1,6 +1,6 @@
 import { createReadStream } from "fs";
-import { operationErrMsg } from "../utils/contants.js";
-import {getMsgWithCurrentPath} from "../utils/index.js";
+import { operationErrMsg } from "../../utils/contants.js";
+import {getMsgWithCurrentPath} from "../../utils/index.js";
 
 const readAndPrintFile = (path) => {
   const rs = createReadStream(path, { encoding: "utf-8" });

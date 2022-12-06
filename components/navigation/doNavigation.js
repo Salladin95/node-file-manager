@@ -1,6 +1,6 @@
 import { doMoveToDir, doUpToDir, printDir } from "./index.js";
 import { cwd } from "node:process";
-import { operationErrMsg } from "../utils/index.js";
+import { operationErrMsg } from "../../utils/index.js";
 
 const doNavigation = async (dataArray) => {
   const command = dataArray[0];

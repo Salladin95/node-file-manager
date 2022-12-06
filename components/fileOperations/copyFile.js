@@ -1,5 +1,5 @@
 import { createReadStream, createWriteStream } from "fs";
-import { getMsgWithCurrentPath, operationErrMsg } from "../utils/index.js";
+import { getMsgWithCurrentPath, operationErrMsg } from "../../utils/index.js";
 import { removeFile } from "./remove.js";
 
 const copyFile = (source, pathToNewFile, isRemoveSource = false) => {

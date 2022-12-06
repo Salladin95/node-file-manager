@@ -1,5 +1,5 @@
 import { copyFile } from "./index.js";
-import { isSlashAtTheEndOfPath } from "../utils/utilsForString.js";
+import { isSlashAtTheEndOfPath } from "../../utils/utilsForString.js";
 
 const moveFile = (source, pathToNewDirectory) => {
   const newFilePath = `${isSlashAtTheEndOfPath(pathToNewDirectory)}${source}`;

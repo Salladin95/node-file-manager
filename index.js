@@ -8,8 +8,14 @@ import {
   removeExtraSpaces,
   unknownInput,
 } from "./utils/index.js";
-import { doNavigation, isNavigationCommand } from "./navigation/index.js";
-import { doFsOperation, isFSCommand } from "./fileOperations/index.js";
+
+import {
+  doFsOperation,
+  doNavigation,
+  doOcCommand,
+  isFSCommand,
+  isNavigationCommand,
+} from "./components/index.js";
 
 const args = getCLIArgs();
 const username = getValueFromStringAfterSeparator(args[0], "=");
@@ -27,6 +33,8 @@ process.stdin.on("data", async (data) => {
     await doNavigation(dataArray);
   } else if (isFSCommand(command)) {
     await doFsOperation(dataArray);
+  } else if (command === "os") {
+    doOcCommand(dataArray);
   } else {
     console.log(unknownInput);
   }
