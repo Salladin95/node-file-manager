@@ -2,8 +2,8 @@ import { homedir } from "os";
 import { chdir } from "node:process";
 
 import {
+  getCliArgByKey,
   getCLIArgs,
-  getValueFromStringAfterSeparator,
   greetUser,
   removeExtraSpaces,
   unknownInput,
@@ -11,14 +11,17 @@ import {
 
 import {
   doFsOperation,
+  doHash,
   doNavigation,
   doOcCommand,
+  doZip,
   isFSCommand,
   isNavigationCommand,
+  isZipCommand,
 } from "./components/index.js";
 
 const args = getCLIArgs();
-const username = getValueFromStringAfterSeparator(args[0], "=");
+const username = getCliArgByKey("--username", args);
 
 chdir(homedir());
 greetUser(username);
@@ -35,6 +38,10 @@ process.stdin.on("data", async (data) => {
     await doFsOperation(dataArray);
   } else if (command === "os") {
     doOcCommand(dataArray);
+  } else if (command === "hash") {
+    await doHash(dataArray);
+  } else if (isZipCommand(command)) {
+    await doZip(dataArray);
   } else {
     console.log(unknownInput);
   }
@@ -42,5 +49,5 @@ process.stdin.on("data", async (data) => {
 
 process.on("SIGINT", () => {
   console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
-  process.exit(0);
+  process.nextTick(() => process.exit(0));
 });

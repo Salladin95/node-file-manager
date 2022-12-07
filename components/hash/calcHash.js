@@ -4,14 +4,16 @@ import { createHash } from "crypto";
 const calculateHash = async (targetFilePath) => {
   const rs = createReadStream(targetFilePath);
   const hashSum = createHash("sha256");
-  rs.on("data", (dataChunk) => {
-    hashSum.update(dataChunk);
-  });
-  return rs.on("end", () => {
-    rs.close();
-    const hex = hashSum.digest("hex");
-    return hashSum;
+  return new Promise((resolve, reject) => {
+    rs.on("data", (dataChunk) => {
+      hashSum.update(dataChunk);
+    });
+    rs.on("end", () => {
+      rs.close();
+      resolve(hashSum.digest("hex"));
+    });
+    rs.on("error", (err) => reject(err));
   });
 };
 
-await calculateHash();
+export default calculateHash;

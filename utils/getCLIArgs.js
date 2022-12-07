@@ -1,6 +1,7 @@
 const getCLIArgs = () => {
+  const myArgs = process.argv.slice(2);
   const startCustomArgsIndex = process.argv.indexOf("--") + 1;
-  return process.argv.slice(startCustomArgsIndex);
+  return myArgs.slice(startCustomArgsIndex);
 };
 
 export default getCLIArgs;

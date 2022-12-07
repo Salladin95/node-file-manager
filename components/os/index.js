@@ -1,4 +1,4 @@
-import ocInfo from "./onInfo.js";
+import osInfo from "./osInfo.js";
 import isItOcCommand from "./isOcCommand.js";
 import { operationErrMsg } from "../../utils/index.js";
 
@@ -9,7 +9,7 @@ const doOcCommand = (inputArray) => {
   }
   const command = inputArray[1].slice(2);
   isItOcCommand(command)
-    ? console.log(ocInfo[command.toLowerCase()])
+    ? console.log(osInfo[command.toLowerCase()])
     : console.log(operationErrMsg);
 };
 

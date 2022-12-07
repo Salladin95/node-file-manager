@@ -1,4 +1,4 @@
-import { arch, cpus, EOL, homedir, userInfo } from "components/os/index.js";
+import { arch, cpus, EOL, homedir, userInfo } from 'os';
 
 const getEOL = () => JSON.stringify(EOL);
 const getCPUS = () => cpus();

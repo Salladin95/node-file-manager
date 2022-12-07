@@ -1,6 +1,6 @@
 import { createReadStream } from "fs";
 import { operationErrMsg } from "../../utils/contants.js";
-import {getMsgWithCurrentPath} from "../../utils/index.js";
+import { getMsgWithCurrentPath } from "../../utils/index.js";
 
 const readAndPrintFile = (path) => {
   const rs = createReadStream(path, { encoding: "utf-8" });
@@ -8,7 +8,7 @@ const readAndPrintFile = (path) => {
   rs.on("data", (dataChunk) => {
     fileContent += dataChunk;
   });
-  rs.on("close", () => {
+  rs.on("end", () => {
     console.log(fileContent);
     console.log(getMsgWithCurrentPath());
   });

@@ -1,30 +1,25 @@
 import { createReadStream, createWriteStream } from "fs";
-import { createGunzip } from "zlib";
-import { promisify } from "util";
-import { pipeline } from "stream";
-import path from "path";
-import { fileURLToPath } from "url";
+import { createBrotliDecompress } from "zlib";
+import { parse, resolve } from "path";
+import { cwd } from "node:process";
+import { promisify } from 'util';
+import { pipeline } from 'stream';
+import {
+  buildPathForOutputFile,
+  isInputFileAndIsOutputIsDir,
+} from "../../utils/index.js";
+import isZipFile from "./isZipFile.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const folder = path.join(__dirname, "files");
+const pipe = promisify(pipeline);
 
-const pipelineAsync = promisify(pipeline);
-
-const doUnZip = async (input, output) => {
-  const source = createReadStream(input);
-  const unzip = createGunzip();
-  const destination = createWriteStream(output);
-  await pipelineAsync(source, unzip, destination);
+const decompress = async (inputFile, outputDir) => {
+  isInputFileAndIsOutputIsDir(inputFile, outputDir);
+  isZipFile(inputFile)
+  const targetPath = buildPathForOutputFile(inputFile, outputDir);
+  const source = createReadStream(inputFile);
+  const destination = createWriteStream(targetPath);
+  const brotli = createBrotliDecompress();
+  await pipe(source, brotli, destination);
 };
 
-const decompress = async () => {
-  const source = path.join(folder, "archive.gz");
-  const destination = path.join(folder, "fileToCompress.txt");
-  await doUnZip(source, destination).catch((err) => {
-    console.error("An error occurred: ", err);
-    process.exitCode = 1;
-  });
-};
-
-await decompress();
+export default decompress;
