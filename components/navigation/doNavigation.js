@@ -1,16 +1,10 @@
-import { doMoveToDir, doUpToDir, printDir } from "./index.js";
-import { cwd } from "node:process";
-import { operationErrMsg } from "../../utils/index.js";
+import { handlingErrorAsync } from "../../hof/index.js";
+import { createNavigation } from "./index.js";
 
 const doNavigation = async (dataArray) => {
+  const navigation = createNavigation();
   const command = dataArray[0];
-  if (command === "cd") {
-    dataArray[1] ? doMoveToDir(dataArray[1]) : console.log(operationErrMsg);
-  } else if (command === "up") {
-    doUpToDir();
-  } else if (command === "ls") {
-    await printDir(cwd());
-  }
+  await navigation[command](dataArray);
 };
 
-export default doNavigation;
+export default handlingErrorAsync(doNavigation);

@@ -1,5 +1,5 @@
 import { rm } from "fs/promises";
-import { withCurrentPathMsgAsync } from "../../hof/index.js";
+import { handlingErrorAsync } from "../../hof/index.js";
 
 const removeFile = async (file) => {
   await rm(file);
@@ -7,4 +7,4 @@ const removeFile = async (file) => {
 
 export { removeFile };
 
-export default withCurrentPathMsgAsync(removeFile);
+export default handlingErrorAsync(removeFile);

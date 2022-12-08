@@ -1,4 +1,4 @@
-import withCurrentPathMsgSync from "./withCurrentPathMsgSync.js";
-import withCurrentPathMsgAsync from "./withCurrentPathMsgAsync.js";
+import handlingErrorSync from "./handlingErrorSync.js";
+import handlingErrorAsync from "./handlingErrorAsync.js";
 
-export { withCurrentPathMsgSync, withCurrentPathMsgAsync };
+export { handlingErrorSync, handlingErrorAsync };

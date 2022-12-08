@@ -1,5 +1,5 @@
 import calculateHash from "./calcHash.js";
-import { withCurrentPathMsgAsync } from "../../hof/index.js";
+import { handlingErrorAsync } from "../../hof/index.js";
 import { statSync } from "fs";
 
 const doHash = async (dataArray) => {
@@ -11,4 +11,4 @@ const doHash = async (dataArray) => {
   console.log(hash);
 };
 
-export default withCurrentPathMsgAsync(doHash);
+export default handlingErrorAsync(doHash);

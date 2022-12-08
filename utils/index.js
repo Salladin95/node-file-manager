@@ -11,8 +11,10 @@ import {
 import isInputFileAndIsOutputIsDir from "./isInputFileAndIsOutputIsDir.js";
 import buildPathForOutputFile from "./buildPathForOutputFile.js";
 import replaceFileExtension from "./replaceFileExtension.js";
+import checkArrLength from "./checkArrLength.js";
 
 export {
+  checkArrLength,
   buildPathForOutputFile,
   replaceFileExtension,
   isInputFileAndIsOutputIsDir,

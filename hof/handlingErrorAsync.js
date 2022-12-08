@@ -1,7 +1,7 @@
 import { getMsgWithCurrentPath } from "../utils/greet.js";
 import { operationErrMsg } from "../utils/index.js";
 
-const withCurrentPathMsgAsync = (fn) => {
+const handlingErrorAsync = (fn) => {
   return async (...arg) => {
     try {
       await fn(...arg);
@@ -12,4 +12,4 @@ const withCurrentPathMsgAsync = (fn) => {
   };
 };
 
-export default withCurrentPathMsgAsync;
+export default handlingErrorAsync;

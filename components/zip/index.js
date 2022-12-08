@@ -1,7 +1,7 @@
 import compress from "./compress.js";
 import decompress from "./decompress.js";
 import isZipCommand from "./isZipCommand.js";
-import { withCurrentPathMsgSync } from "../../hof/index.js";
+import { handlingErrorSync } from "../../hof/index.js";
 
 const doZip = async (dataArray) => {
   if (dataArray.length !== 3) {
@@ -20,4 +20,4 @@ const doZip = async (dataArray) => {
 };
 
 export { isZipCommand };
-export default withCurrentPathMsgSync(doZip);
+export default handlingErrorSync(doZip);
