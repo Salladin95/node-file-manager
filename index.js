@@ -1,5 +1,6 @@
 import { homedir } from "os";
 import { chdir } from "node:process";
+import { createInterface } from 'readline';
 
 import {
   getCliArgByKey,
@@ -23,15 +24,21 @@ import {
 const args = getCLIArgs();
 const username = getCliArgByKey("--username", args);
 
+const readLine = createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
 chdir(homedir());
 greetUser(username);
 
-process.stdin.on("data", async (data) => {
+
+readLine.on("line", async (data) => {
   const dataArray = removeExtraSpaces(data).split(" ");
   const command = dataArray[0];
 
   if (command === ".exit") {
-    process.emit("SIGINT");
+    readLine.emit("SIGINT");
   } else if (isNavigationCommand(command)) {
     await doNavigation(dataArray);
   } else if (isFSCommand(command)) {
@@ -47,7 +54,7 @@ process.stdin.on("data", async (data) => {
   }
 });
 
-process.on("SIGINT", () => {
+readLine.on("SIGINT", () => {
   console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
   process.nextTick(() => process.exit(0));
 });
