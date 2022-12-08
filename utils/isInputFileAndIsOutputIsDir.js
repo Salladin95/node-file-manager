@@ -1,10 +1,9 @@
-import { statSync } from "fs";
-import { fsErrorMsg } from "./contants.js";
+import { isDir, isFile } from "./index.js";
 
 const isInputFileAndIsOutputIsDir = (inp, out) => {
-  if (!statSync(inp).isFile() || !statSync(out).isDirectory()) {
-    throw new Error(fsErrorMsg);
-  }
+  isFile(inp);
+  isDir(out);
+  return true;
 };
 
 export default isInputFileAndIsOutputIsDir;

@@ -1,9 +1,8 @@
 import { copyFile } from "./index.js";
-import { isSlashAtTheEndOfPath } from "../../utils/utilsForString.js";
+import { cwd } from "node:process";
 
 const moveFile = (source, pathToNewDirectory) => {
-  const newFilePath = `${isSlashAtTheEndOfPath(pathToNewDirectory)}${source}`;
-  copyFile(source, newFilePath, true);
+  copyFile(source, pathToNewDirectory, true);
 };
 
 export default moveFile;

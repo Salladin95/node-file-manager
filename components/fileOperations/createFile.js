@@ -5,4 +5,4 @@ const createFile = async (fileName, content = "") => {
   await writeFile(fileName, content);
 };
 
-export default handlingErrorAsync(createFile);
+export default createFile;

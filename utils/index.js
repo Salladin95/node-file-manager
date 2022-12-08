@@ -12,8 +12,14 @@ import isInputFileAndIsOutputIsDir from "./isInputFileAndIsOutputIsDir.js";
 import buildPathForOutputFile from "./buildPathForOutputFile.js";
 import replaceFileExtension from "./replaceFileExtension.js";
 import checkArrLength from "./checkArrLength.js";
+import isFile from "./isFile.js";
+import isDir from "./isDir.js";
+import isCurrentDirEqualTargetDir from "./isCurrentDirEqualTargetDir.js";
 
 export {
+  isCurrentDirEqualTargetDir,
+  isFile,
+  isDir,
   checkArrLength,
   buildPathForOutputFile,
   replaceFileExtension,
