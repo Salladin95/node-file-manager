@@ -1,9 +1,11 @@
 import calculateHash from "./calcHash.js";
 import { handlingErrorAsync } from "../../hof/index.js";
 import { statSync } from "fs";
+import { resolve } from "path";
+import { cwd } from "node:process";
 
 const doHash = async (dataArray) => {
-  const pathToFile = dataArray.slice(1).join(' ');
+  const pathToFile = resolve(cwd(), dataArray.slice(1).join(" "));
   if (!statSync(pathToFile).isFile()) {
     throw new Error(`${pathToFile} is not a directory.`);
   }

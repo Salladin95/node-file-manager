@@ -9,7 +9,10 @@ import {
   removeExtraSpaces,
 } from "./utilsForString.js";
 import isInputFileAndIsOutputIsDir from "./isInputFileAndIsOutputIsDir.js";
-import buildPathForOutputFile from "./buildPathForOutputFile.js";
+import {
+  buildPathForOutputFile,
+  buildPathForOutputFileWithoutExtension,
+} from "./buildPathForOutputFile.js";
 import replaceFileExtension from "./replaceFileExtension.js";
 import checkArrLength from "./checkArrLength.js";
 import isFile from "./isFile.js";
@@ -22,6 +25,7 @@ export {
   isDir,
   checkArrLength,
   buildPathForOutputFile,
+  buildPathForOutputFileWithoutExtension,
   replaceFileExtension,
   isInputFileAndIsOutputIsDir,
   getCliArgByKey,
