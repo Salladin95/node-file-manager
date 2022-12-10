@@ -9,7 +9,7 @@ const doOcCommand = (inputArray) => {
   if (!isItOcCommand(command)) {
     throw new Error(operationErrMsg);
   }
-  console.log(osInfo[command.toLowerCase()]);
+  console.table(osInfo[command.toLowerCase()]());
 };
 
 export default handlingErrorSync(doOcCommand);
