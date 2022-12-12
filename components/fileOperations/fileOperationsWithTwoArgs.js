@@ -7,7 +7,7 @@ import {
   isDir,
   isFile,
 } from "../../utils/index.js";
-import { parse, resolve } from "path";
+import {parse, resolve} from "path";
 import { cwd } from "node:process";
 
 const commandsWithTwoArgs = ["rn", "mv", "cp"];
@@ -26,9 +26,16 @@ const doFileOperationWithTwoArg = async (command, payload) => {
   }
   isDir(outputPath);
   const targetPath = buildPathForOutputFile(source, outputPath);
+  const root = parse(cwd()).root;
   if (command === "cp") {
+    if (targetPath === root) {
+      throw new Error();
+    }
     copyFile(source, targetPath);
   } else if (command === "mv") {
+    if (targetPath === root) {
+      throw new Error();
+    }
     !isCurrentDirEqualTargetDir(outputPath) && moveFile(source, targetPath);
   }
 };
